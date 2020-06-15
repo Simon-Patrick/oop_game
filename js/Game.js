@@ -16,26 +16,61 @@
     createPhrases() {
       const phrases = [
         {
-          phrase: "We need a bigger boat"
+          phrase: "we need a bigger boat"
         },
         {
-          phrase: "A piece of cake"
+          phrase: "a piece of cake"
         },
         {
-          phrase: "A sight for sore eyes"
+          phrase: "a sight for sore eyes"
         },
         {
-          phrase: "Cool as a cucumber"
+          phrase: "cool as a cucumber"
         },
         {
-          phrase: "Busy as a bee"
+          phrase: "busy me"
         }
       ]
       return phrases
     }
 
     getRandomPhrase() {
-      let randomNumber = Math.floor(Math.random() * this.phrases.length);
+      const randomNumber = Math.floor(Math.random() * this.phrases.length);
       return this.phrases[randomNumber];
     }
+
+    /**
+    * Begins game by selecting a random phrase and displaying it to user
+    */
+    startGame() {
+      const hideGame = document.getElementById('overlay');
+      hideGame.style.display = 'none';
+      let randomPhrase = this.getRandomPhrase();
+      const phrase = new Phrase(randomPhrase.phrase);
+      phrase.addPhraseToDisplay();
+      this.activePhrase = phrase;
+    };
+
+    /**
+    * Handles the logic for a player guessing a letter
+    */
+    handleInteraction() {
+
+    }
+
+    /**
+    * Checks for winning move
+    * @return {boolean} True if game has been won, false if game wasn't
+    won
+    */
+    checkForWin() {
+      let hiddenClassCount = 0;
+      const phraseTiles = document.querySelectorAll('#phrase ul li');
+      for(let li of phraseTiles) {
+        if(li.classList.contains('hide') && (!li.classList.contains('space'))) {
+          hiddenClassCount ++
+        }
+      }
+      return hiddenClassCount === 0;
+    };
  }

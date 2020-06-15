@@ -24,4 +24,33 @@
       }
     }
   };
+
+  /**
+  * Checks if passed letter is in phrase
+  * @param (string) letter - Letter to check
+  */
+  checkLetter(letter) {
+    let charCount = 0;
+    for(let char of this.phrase) {
+      if(char === letter) {
+        this.showMatchedLetter(char);
+        charCount ++;
+      } 
+    }
+    return charCount > 0;
+  };
+
+  /**
+  * Displays passed letter on screen after a match is found
+  * @param (string) letter - Letter to display
+  */
+  showMatchedLetter(letter) {
+    const phraseTiles = document.querySelectorAll('#phrase ul li');
+    for(const li of phraseTiles) {
+      if(letter === li.innerText) {
+        li.classList.remove('hide');
+        li.classList.add('show');
+      }
+    }
+  };
  }
