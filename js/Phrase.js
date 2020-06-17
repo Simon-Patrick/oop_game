@@ -30,14 +30,14 @@
   * @param (string) letter - Letter to check
   */
   checkLetter(letter) {
-    let charCount = 0;
-    for(let char of this.phrase) {
+    const phrase = this.phrase.phrase.split('');
+    return phrase.reduce((charCount, char) => {
       if(char === letter) {
         this.showMatchedLetter(char);
-        charCount ++;
-      } 
-    }
-    return charCount > 0;
+        return charCount += 1;
+      }
+      return charCount > 0;
+    },0)
   };
 
   /**
