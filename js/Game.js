@@ -15,21 +15,11 @@
     */
     createPhrases() {
       const phrases = [
-        {
-          phrase: "we need a bigger boat"
-        },
-        {
-          phrase: "a piece of cake"
-        },
-        {
-          phrase: "a sight for sore eyes"
-        },
-        {
-          phrase: "cool as a cucumber"
-        },
-        {
-          phrase: "a dime a dozen"
-        }
+          "we need a bigger boat",
+          "a piece of cake",
+          "a sight for sore eyes",
+          "cool as a cucumber",
+          "a dime a dozen"
       ]
       return phrases
     }
@@ -47,15 +37,12 @@
       existingPhrase.innerHTML = '';
       this.resetKeyboard();
       this.resetLives();
+      this.activePhrase = new Phrase(this.getRandomPhrase());
       setTimeout(function() {
         const hideGame = document.getElementById('overlay');
         hideGame.style.display = 'none';
       }, 300);
-
-      let randomPhrase = this.getRandomPhrase();
-      const phrase = new Phrase(randomPhrase.phrase);
-      phrase.addPhraseToDisplay();
-      this.activePhrase = phrase;
+      this.activePhrase.addPhraseToDisplay();     
     };
 
     resetLives() {
@@ -77,8 +64,7 @@
     * Handles the logic for a player guessing a letter
     */
     handleInteraction(button) {
-      const phrase = new Phrase(this.activePhrase);
-      let letterFound = phrase.checkLetter(button.target.innerText);
+      let letterFound = this.activePhrase.checkLetter(button.target.innerText);
       if(letterFound) {
         button.target.disabled = true;
         button.target.classList.add('chosen');
